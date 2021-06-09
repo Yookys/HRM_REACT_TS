@@ -6,8 +6,6 @@ import {IObj} from '../models/commonModel';
 export const defaultHeaders: IObj = {
   'Cache-Control': 'no-store, no-cache, must-revalidate',
   Pragma: 'no-cache',
-  // TODO Выяснить, будет ли актуален заголовок
-  'X-TYK-API-KEY': process.env.REACT_APP_TYK_API_KEY,
 };
 
 /**

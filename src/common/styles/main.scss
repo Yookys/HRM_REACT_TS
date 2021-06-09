@@ -7,7 +7,7 @@
 @import 'redefinition';
 
 body {
-  background-color: $background_secondary;
+  background-color: $white;
 }
 
 html,
@@ -15,7 +15,6 @@ body,
 #root {
   @include flexbox();
   @include flex-direction(column);
-  @include flex(1);
   width: 700px;
   height: 400px;
 }

@@ -3,14 +3,14 @@ import Axios, {AxiosError, AxiosResponse, Canceler} from 'axios';
 import {isEmpty, isFunction} from '../utils/commonUtils';
 import {defaultHeaders, defaultReject} from '../constants/axiosConst';
 import axiosInstance from '../utils/axiosInstance';
-import services from '../constants/configConst';
-import config from '../config';
 import {IObj} from '../models/commonModel';
 
 /** Общая модель запроса */
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export type request = <T>(requestConfig: requestConfig<T>) => void;
 
 /** Общая конфигурация запроса */
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export interface requestConfig<T> {
   url: string;
   body?: IObj;
@@ -49,15 +49,16 @@ const useAxios = (): IUseAxios => {
    * Применяем перехватчики
    * И останавливаем запросы при размонтировании
    */
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       cancelFunctions.forEach((cancelF): void => {
         if (isFunction(cancelF)) {
           cancelF();
         }
       });
-    };
-  }, []); // eslint-disable-line
+    },
+    []
+  ); // eslint-disable-line
 
   /**
    * Подготовка запроса
@@ -103,11 +104,12 @@ const useAxios = (): IUseAxios => {
       finallyFunction?: (response: AxiosResponse<T>) => void
     ) =>
     (response: AxiosResponse<T>) => {
-      let responseTmp = response;
+      const responseTmp = response;
       if (typeof response.data === 'string') {
         try {
           responseTmp.data = JSON.parse(response.data);
         } catch (e) {
+          // eslint-disable-next-line @typescript-eslint/no-throw-literal
           throw JSON.stringify(defaultReject);
         }
       }
@@ -128,16 +130,6 @@ const useAxios = (): IUseAxios => {
     <T>(rejectFunction?: (response: AxiosError<T>) => void, finallyFunction?: (response: AxiosError<T>) => void) =>
     (reject: AxiosError<T>) => {
       if (!Axios.isCancel(reject)) {
-        /**
-         * 401 статус - отправляем пользователя на менеджера ЕПА
-         * TODO Добавил верные адреса
-         */
-        if (!isEmpty(reject) && !isEmpty(reject.response) && reject!.response!.status === 401) {
-          window.location.href = `${
-            config.services[services.epaManager]
-          }passport/UI/Login?org=staff&service=default&goto=${config.services[services.epaGateway]}ui/smb/strcc`;
-          return;
-        }
         let rejectTmp: any = reject;
         if (
           isEmpty(reject) ||

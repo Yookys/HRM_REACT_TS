@@ -1,6 +1,7 @@
 {
   "SSP_HOST": {
-    "HOST": "k3-epaa-mgt401lv.vtb24.ru",
+    "HOST": "hrm.ssp-soft.com",
+    "PORT": "80",
     "PATH": "/"
   }
 }

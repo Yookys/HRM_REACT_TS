@@ -1,11 +1,9 @@
-import {IObj} from '../models/commonModel';
-
 /**
  * Перечень сервисов, которые должны быть обязательно сконфигурированы
  */
-const services: IObj = {
+const services: {sspHost: string} = {
   /** Хост SSP */
-  sspHost: 'EPA_MANAGER',
+  sspHost: 'SSP_HOST',
 };
 
 export default services;

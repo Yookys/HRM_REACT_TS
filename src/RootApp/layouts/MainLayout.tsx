@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, Route, Switch} from 'react-router';
+import {Route, Switch} from 'react-router';
 import MainPage from '../pages/MainPage/MainPage';
 
 /**
@@ -8,9 +8,7 @@ import MainPage from '../pages/MainPage/MainPage';
 const RootLayout = (): JSX.Element => (
   <Switch>
     {/* Главная страница */}
-    <Route exact path="/" component={MainPage} />
-    {/* Редирект на основную страницу */}
-    <Redirect to="/" />
+    <Route component={MainPage} />
   </Switch>
 );
 
