@@ -1,0 +1,419 @@
+@import 'variables';
+
+// Миксины UI-Kit
+@mixin font_style($size, $height, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $height;
+}
+
+// Стили заголовков.
+@mixin heading_large_1() {
+  @include font_style($font_size_7xl, $line_height_5xl, $font_weight_semibold);
+}
+
+@mixin heading_large_2() {
+  @include font_style($font_size_6xl, $line_height_4xl, $font_weight_semibold);
+}
+
+@mixin heading_1() {
+  @include font_style($font_size_5xl, $line_height_3xl, $font_weight_semibold);
+}
+
+@mixin heading_2() {
+  @include font_style($font_size_4xl, $line_height_2xl, $font_weight_semibold);
+}
+
+@mixin heading_3() {
+  @include font_style($font_size_3xl, $line_height_xl, $font_weight_semibold);
+}
+
+@mixin heading_4() {
+  @include font_style($font_size_2xl, $line_height_lg, $font_weight_semibold);
+}
+
+@mixin heading_5() {
+  @include font_style($font_size_xl, $line_height_md, $font_weight_semibold);
+}
+
+@mixin heading_6() {
+  @include font_style($font_size_lg, $line_height_md, $font_weight_semibold);
+}
+
+// стили подзаголовков текста и подписей
+@mixin subtitle_18() {
+  @include font_style($font_size_lg, $line_height_lg, $font_weight_book);
+}
+
+@mixin subtitle_16() {
+  @include font_style($font_size_md, $line_height_m, $font_weight_semibold);
+}
+
+@mixin subtitle_14() {
+  @include font_style($font_size_m, $line_height_m, $font_weight_semibold);
+}
+
+// Стили базового текста
+@mixin body_long_16() {
+  @include font_style($font_size_md, $line_height_md, $font_weight_book);
+}
+
+@mixin body_small_16() {
+  @include font_style($font_size_md, $line_height_m, $font_weight_book);
+}
+
+@mixin body_long_14() {
+  @include font_style($font_size_m, $line_height_m, $font_weight_book);
+}
+
+@mixin body_small_14() {
+  @include font_style($font_size_m, $line_height_sm, $font_weight_book);
+}
+
+@mixin caption_12() {
+  @include font_style($font_size_sm, $line_height_sm, $font_weight_book);
+}
+
+// Стили для кнопок
+@mixin button_16() {
+  @include font_style($font_size_md, $line_height_md, $font_weight_medium);
+}
+
+@mixin button_14() {
+  @include font_style($font_size_m, $line_height_m, $font_weight_medium);
+}
+
+@mixin button_12() {
+  @include font_style($font_size_sm, $line_height_sm, $font_weight_medium);
+}
+
+@mixin shadow-2() {
+  @include box-shadow(
+    0px 5px 10px rgba(103, 108, 119, 0.03),
+    0px 3px 4px rgba(103, 108, 119, 0.04),
+    0px 1.5px 2px rgba(103, 108, 119, 0.05),
+    0px 0.5px 1px rgba(103, 108, 119, 0.12)
+  );
+}
+
+@mixin shadow-4() {
+  @include box-shadow(
+    0px 5px 10px rgba(103, 108, 119, 0.03),
+    0px 3px 4px rgba(103, 108, 119, 0.04),
+    0px 1.5px 2px rgba(103, 108, 119, 0.05),
+    0px 0.5px 1px rgba(103, 108, 119, 0.12)
+  );
+}
+
+@mixin shadow-8() {
+  @include box-shadow(
+    0px -1px 6px rgba(103, 108, 119, 0.1),
+    0px 20px 30px rgba(103, 108, 119, 0.07),
+    0px 15px 15px rgba(103, 108, 119, 0.07),
+    0px 10px 8px rgba(103, 108, 119, 0.04),
+    0px 5px 5px rgba(103, 108, 119, 0.03),
+    0px 1px 2px rgba(103, 108, 119, 0.1)
+  );
+}
+
+@mixin shadow-work-zone() {
+  @include box-shadow(
+    0px 2px 12px rgba(103, 108, 119, 0.0384728),
+    0px 2px 8px rgba(103, 108, 119, 0.0468561),
+    0px 1px 5px rgba(103, 108, 119, 0.07)
+  );
+}
+
+@mixin shadow-card() {
+  @include box-shadow(0 0 1px rgb(34 36 42 / 10%), 0 0 3px rgb(34 36 42 / 5%), 0 0 20px rgb(34 36 42 / 8%));
+}
+
+@mixin shadow-card-hover() {
+  @include box-shadow(0 0 1px rgb(34 36 42 / 10%), 0 0 3px rgb(34 36 42 / 20%), 0 0 20px rgb(34 36 42 / 12%));
+}
+
+@mixin border-radius-4() {
+  @include border-radius(4px);
+}
+
+@mixin border-radius-8() {
+  @include border-radius(8px);
+}
+
+@mixin border-radius-top() {
+  @include border-radius(2px 2px 0 0);
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin text-shadow($x1: 2px, $y1: 2px, $blur1: 5px, $color1: black, $x2: null, $y2: null, $blur2: null, $color2: null) {
+  @if ($x2) {
+    text-shadow: $x1 $y1 $blur1 $color1, $x2 $y2 $blur2 $color2;
+  } @else {
+    text-shadow: $x1 $y1 $blur1 $color1;
+  }
+}
+
+@mixin box-shadow($args...) {
+  -webkit-box-shadow: $args;
+  -moz-box-shadow: $args;
+  box-shadow: $args;
+}
+
+@mixin no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+
+@mixin transform($transforms) {
+  -webkit-transform: $transforms;
+  -moz-transform: $transforms;
+  -ms-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin rotate($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin scale($scale) {
+  @include transform(scale($scale));
+}
+
+@mixin translate($x, $y) {
+  @include transform(translate($x, $y));
+}
+
+@mixin skew($x, $y) {
+  @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+@mixin transform-origin($origin) {
+  -webkit-transform-origin: $origin;
+  -moz-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+}
+
+@mixin text-shorten {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-border {
+  text-shadow: 0 -1px 0 #000, 0 -1px 0 #000, 0 1px 0 #000, 0 1px 0 #000, -1px 0 0 #000, 1px 0 0 #000, -1px 0 0 #000,
+    1px 0 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+@mixin flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin inline-flex {
+  display: -webkit-inline-box;
+  display: -moz-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+@mixin flex($fg: 1, $fs: 0, $fb: auto) {
+  $fg-boxflex: $fg;
+  @if type-of($fg) == 'list' {
+    $fg-boxflex: nth($fg, 1);
+  }
+  -webkit-box: $fg-boxflex;
+  -moz-box: $fg-boxflex;
+  -webkit-flex: $fg $fs $fb;
+  -ms-flex: $fg $fs $fb;
+  flex: $fg $fs $fb;
+}
+
+@mixin flex-direction($direction: row) {
+  @if $direction == row-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: horizontal;
+    -moz-box-direction: reverse;
+    -moz-box-orient: horizontal;
+  } @else if $direction == column {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-direction: normal;
+    -moz-box-orient: vertical;
+  } @else if $direction == column-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: vertical;
+    -moz-box-direction: reverse;
+    -moz-box-orient: vertical;
+  } @else {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-direction: normal;
+    -moz-box-orient: horizontal;
+  }
+  -webkit-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  flex-direction: $direction;
+}
+
+@mixin flex-wrap($value: nowrap) {
+  -webkit-flex-wrap: $value;
+  @if $value == nowrap {
+    -ms-flex-wrap: none;
+  } @else {
+    -ms-flex-wrap: $value;
+  }
+  flex-wrap: $value;
+}
+
+@mixin flex-flow(
+  $values: (
+    row nowrap,
+  )
+) {
+  -webkit-flex-flow: $values;
+  -ms-flex-flow: $values;
+  flex-flow: $values;
+}
+
+@mixin order($int: 0) {
+  -webkit-box-ordinal-group: $int + 1;
+  -moz-box-ordinal-group: $int + 1;
+  -webkit-order: $int;
+  -ms-flex-order: $int;
+  order: $int;
+}
+
+@mixin flex-grow($int: 1) {
+  -webkit-box-flex: $int;
+  -moz-box-flex: $int;
+  -webkit-flex-grow: $int;
+  -ms-flex: $int;
+  flex-grow: $int;
+}
+
+@mixin flex-shrink($int: 0) {
+  -webkit-flex-shrink: $int;
+  -moz-flex-shrink: $int;
+  -ms-flex: $int;
+  flex-shrink: $int;
+}
+
+@mixin flex-basis($value: auto) {
+  -webkit-flex-basis: $value;
+  flex-basis: $value;
+}
+
+@mixin justify-content($value: flex-start) {
+  @if $value == flex-start {
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -ms-flex-pack: start;
+  } @else if $value == flex-end {
+    -webkit-box-pack: end;
+    -moz-box-pack: end;
+    -ms-flex-pack: end;
+  } @else if $value == space-between {
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+  } @else if $value == space-around {
+    -ms-flex-pack: distribute;
+  } @else {
+    -webkit-box-pack: $value;
+    -moz-box-pack: $value;
+    -ms-flex-pack: $value;
+  }
+  -webkit-justify-content: $value;
+  justify-content: $value;
+}
+
+@mixin align-content($value: stretch) {
+  -webkit-align-content: $value;
+  @if $value == flex-start {
+    -ms-flex-line-pack: start;
+  } @else if $value == flex-end {
+    -ms-flex-line-pack: end;
+  } @else {
+    -ms-flex-line-pack: $value;
+  }
+  align-content: $value;
+}
+
+@mixin align-items($value: stretch) {
+  @if $value == flex-start {
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -ms-flex-align: start;
+  } @else if $value == flex-end {
+    -webkit-box-align: end;
+    -moz-box-align: end;
+    -ms-flex-align: end;
+  } @else {
+    -webkit-box-align: $value;
+    -moz-box-align: $value;
+    -ms-flex-align: $value;
+  }
+  -webkit-align-items: $value;
+  align-items: $value;
+}
+
+@mixin align-self($value: auto) {
+  -webkit-align-self: $value;
+  @if $value == flex-start {
+    -ms-flex-item-align: start;
+  } @else if $value == flex-end {
+    -ms-flex-item-align: end;
+  } @else {
+    -ms-flex-item-align: $value;
+  }
+  align-self: $value;
+}

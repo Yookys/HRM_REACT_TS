@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "HRM PWA",
+  "description": "HRM PWA Плагин для Google Chrome",
+  "version": "2.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "background",
+    "https://*/*"
+  ]
+}

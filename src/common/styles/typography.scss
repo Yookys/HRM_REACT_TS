@@ -1,0 +1,72 @@
+@import 'variables';
+@import 'mixins';
+
+html,
+body,
+*,
+input,
+textarea,
+button,
+label,
+span {
+  font-family: $font, $font-secondary, sans-serif;
+}
+
+h1 {
+  @include heading_1();
+}
+
+h2 {
+  @include heading_2();
+}
+
+h3 {
+  @include heading_3();
+}
+
+h4 {
+  @include heading_4();
+}
+
+h5 {
+  @include heading_5();
+}
+
+h6 {
+  @include heading_6();
+}
+
+.subtitle {
+  &-18 {
+    @include subtitle_18();
+  }
+  &-16 {
+    @include subtitle_16();
+  }
+  &-14 {
+    @include subtitle_14();
+  }
+}
+
+.body {
+  &-long {
+    &-16 {
+      @include body_long_16();
+    }
+
+    &-14 {
+      @include body_long_14();
+    }
+  }
+
+  &-small {
+    &-14 {
+      @include body_small_14();
+    }
+
+    &-16 {
+      @include body_small_16();
+    }
+  }
+}
+

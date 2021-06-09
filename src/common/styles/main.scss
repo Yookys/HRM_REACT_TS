@@ -1,0 +1,21 @@
+@import 'reset';
+@import 'font';
+@import 'variables';
+@import 'mixins';
+@import 'typography';
+@import 'global';
+@import 'redefinition';
+
+body {
+  background-color: $background_secondary;
+}
+
+html,
+body,
+#root {
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex(1);
+  width: 700px;
+  height: 400px;
+}

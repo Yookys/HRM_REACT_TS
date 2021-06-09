@@ -1,0 +1,131 @@
+/* ------------------------------ ЦВЕТА ------------------------------ */
+$white: #ffffff;
+$black: #000000;
+
+$blue-100: #014;
+$blue-90: #001d6d;
+$blue-80: #022d9a;
+$blue-70: #0142d3;
+$blue-60: #0062ff;
+$blue-50: #307fff;
+$blue-40: #6fa3ff;
+$blue-30: #a7c7ff;
+$blue-20: #d6e4fe;
+$blue-10: #edf5ff;
+
+$grey-100: #000;
+$grey-90: #22242a;
+$grey-80: #37383c;
+$grey-70: #505258;
+$grey-60: #696c73;
+$grey-50: #7b7e86;
+$grey-40: #9a9ea5;
+$grey-30: #b1b5bb;
+$grey-20: #d6d8de;
+$grey-10: #e5e7eb;
+$grey-5: #f3f4f6;
+$grey-white: #fff;
+
+$green-100: #00230c;
+$green-90: #003111;
+$green-80: #04451a;
+$green-70: #096227;
+$green-60: #128238;
+$green-50: #1ba049;
+$green-40: #32c665;
+$green-30: #73e49a;
+$green-20: #b6f1c9;
+$green-10: #eafcf1;
+
+$red-100: #320000;
+$red-90: #520606;
+$red-80: #780a0a;
+$red-70: #a71212;
+$red-60: #c42121;
+$red-50: #f64e4e;
+$red-40: #ff7c7c;
+$red-30: #ffa7a7;
+$red-20: #ffd4d4;
+$red-10: #ffefef;
+
+$orange-100: #3d1100;
+$orange-90: #591c04;
+$orange-80: #7a2503;
+$orange-70: #a63208;
+$orange-60: #d63f09;
+$orange-50: #ff5c22;
+$orange-40: #ff8d64;
+$orange-30: #ffb799;
+$orange-20: #ffd7c3;
+$orange-10: #fff1e5;
+
+$purple-100: #1c0f30;
+$purple-90: #31135e;
+$purple-80: #491d8b;
+$purple-70: #6929c4;
+$purple-60: #8a3ffc;
+$purple-50: #a56eff;
+$purple-40: #be95ff;
+$purple-30: #d4bbff;
+$purple-20: #e8daff;
+$purple-10: #f6f2ff;
+
+$yellow-50: #ffc400;
+$yellow-40: #fdd14c;
+$yellow-30: #fee189;
+$yellow-20: #feeeb8;
+$yellow-10: #fef5d7;
+
+// Основные цвета
+$text-primary: $grey-90; // Основной цвет текста
+$text-secondary: $grey-50; // Цвет второстепенного текста
+$text-white: $white; // Цвет текста на тёмном фоне, основной цвет фона страниц
+
+// Статусные цвета
+$status-success: $green-50; // Успешные, позитивные действия
+$status-danger: $red-60; // Критические действия, ошибки
+$status-warning: $orange-50; // Предупреждения, повышенное внимание
+
+// Цвета бэкграундов
+$background-primary: $white; // Основной цвет фона страниц
+$background-secondary: $grey-5; // Альтернативный цвет фона страниц
+
+// Интерактивные цвета
+$action-primary: $blue-60; // Основной цвет интерактивных элементов
+$action-primary-hover: $blue-70; // Состояние компонента при наведении (hover)
+$action-pressed: $blue-80; // Состояние активного компонента, нажатие (focus)
+$action-danger-hover: $red-70; // Состояние опасности при наведении (hover)
+$action-danger-pressed: $red-90; // Состояние активного компонента опасности, нажатие (focus)
+$action-disabled: $grey-30; // Цвет неактивных элементов
+$action-disabled-background: $grey-10; // Цвет фона неактивных элементов
+$action-hover-background: $grey-5; // Цвет фона активных элементов
+
+$font: 'VTBGroupUI';
+$font-secondary: 'Inter';
+$base: 4px;
+// Стандартные размеры шрифта
+$font_size_sm: 3 * $base;
+$font_size_m: 3.5 * $base;
+$font_size_md: 4 * $base;
+$font_size_lg: 4.5 * $base;
+$font_size_xl: 5 * $base;
+$font_size_2xl: 6 * $base;
+$font_size_3xl: 7 * $base;
+$font_size_4xl: 8.5 * $base;
+$font_size_5xl: 10 * $base;
+$font_size_6xl: 12 * $base;
+$font_size_7xl: 14 * $base;
+// Стандартные высоты шрифта
+$line_height_sm: 4 * $base;
+$line_height_m: 5 * $base;
+$line_height_md: 6 * $base;
+$line_height_lg: 7 * $base;
+$line_height_xl: 8 * $base;
+$line_height_2xl: 9 * $base;
+$line_height_3xl: 11 * $base;
+$line_height_4xl: 13 * $base;
+$line_height_5xl: 15 * $base;
+// базовые толщины шрифта
+$font_weight_book: 400;
+$font_weight_medium: 500;
+$font_weight_semibold: 550;
