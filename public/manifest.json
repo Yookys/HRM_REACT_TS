@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
   "name": "HRM PWA",
+  "short_name": "HRM PWA",
   "description": "HRM PWA Плагин для Google Chrome",
   "version": "1.0.0",
   "browser_action": {
