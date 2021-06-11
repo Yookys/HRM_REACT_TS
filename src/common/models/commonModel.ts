@@ -14,4 +14,5 @@ export namespace Empty {
   export type Undefined = undefined;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type Empty = Empty.Array | Empty.Object | Empty.String | Empty.Null | Empty.Undefined | Empty.Any;

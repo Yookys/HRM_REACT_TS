@@ -1,7 +1,13 @@
 {
-  "SSP_HOST": {
-    "HOST": "hrm.ssp-soft.com",
-    "PORT": "80",
-    "PATH": "/"
+  "HOSTS": {
+    "SSP_HOST": {
+      "SCHEMA": "https",
+      "HOST": "hrm.ssp-soft.com",
+      "PORT": "80",
+      "PATH": "/"
+    }
+  },
+  "FORM_DATA": {
+    "AUTHOR": "skryabinvi"
   }
 }

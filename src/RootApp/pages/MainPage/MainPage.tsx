@@ -7,14 +7,24 @@ import {EFormFields, IFormErrors, IFormValues} from '../../models/FormModel';
 import testFormValidator from '../../validators/FormValidator';
 import {isEmpty} from '../../../common/utils/commonUtils';
 import {IObj} from '../../../common/models/commonModel';
+import config from '../../../common/config';
+import {useLocalStorage} from '../../../common/hooks/useStorage';
+import {StorageVariables} from '../../../common/constants/storageConst';
 
 /**
  * Главная страница
  */
 const MainPage = (): JSX.Element => {
+  const [storageExpert, setStorageExpert] = useLocalStorage<string>(StorageVariables.expert);
+  const [storageLevel, setStorageLevel] = useLocalStorage<string>(StorageVariables.level);
+  const [storagePosition, setStoragePosition] = useLocalStorage<string>(StorageVariables.position);
   const {fields, setField, errors, isSubmit, setIsSubmit, isValidForm} = useForm<IFormValues, IFormErrors>(
     testFormValidator,
-    {},
+    {
+      [EFormFields.expert]: !isEmpty(storageExpert) ? storageExpert : '',
+      [EFormFields.level]: !isEmpty(storageLevel) ? storageLevel : '',
+      [EFormFields.position]: !isEmpty(storagePosition) ? storagePosition : '',
+    },
     {}
   );
 
@@ -30,13 +40,13 @@ const MainPage = (): JSX.Element => {
   const onReserveChromeMessage = (response: IObj) => {
     if (response.action === 'sendForm') {
       const form = document.createElement('form');
-      form.action = 'https://hrm.ssp-soft.com/';
+      form.action = config.services.SSP_HOST;
       form.method = 'post';
 
       const inputAuthor = document.createElement('input');
       inputAuthor.type = 'hidden';
       inputAuthor.name = 'author';
-      inputAuthor.value = 'konevaas';
+      inputAuthor.value = config.formData.AUTHOR;
       form.appendChild(inputAuthor);
 
       const inputUrl = document.createElement('input');
@@ -94,8 +104,22 @@ const MainPage = (): JSX.Element => {
    */
   const handleChangeField =
     (field: EFormFields) =>
-    (event: RadioChangeEvent): void =>
+    (event: RadioChangeEvent): void => {
+      switch (field) {
+        case EFormFields.expert:
+          setStorageExpert(event.target.value);
+          break;
+        case EFormFields.level:
+          setStorageLevel(event.target.value);
+          break;
+        case EFormFields.position:
+          setStoragePosition(event.target.value);
+          break;
+        default:
+          break;
+      }
       setField(field, event.target.value);
+    };
 
   /**
    * Отправка формы

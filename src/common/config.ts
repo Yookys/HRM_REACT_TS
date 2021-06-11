@@ -24,6 +24,8 @@ interface IServiceConfig {
  * Общий класс, содержащий и формирующий конфигурацию
  */
 class Config {
+  formData: IObj = {};
+
   services: IObj = {};
 
   wsServices: IObj = {};
@@ -43,7 +45,8 @@ class Config {
    * @param {Object} configuration - Результат запроса конфигурации
    */
   init(configuration: IObj) {
-    const config: IConfig = configuration.data;
+    this.formData = configuration.data.FORM_DATA;
+    const config: IConfig = configuration.data.HOSTS;
     /** Проверка на пустоту конфига */
     if (isEmpty(config)) {
       throw new Error(`Config error (${process.env.REACT_APP_CONFIG}) - is empty.`);
@@ -71,9 +74,11 @@ class Config {
         ? `${this.services[serviceName]}${config[serviceName].HOST}`
         : `${this.services[serviceName]}${window.location.hostname}`;
       /** Порт */
-      this.services[serviceName] = !isEmpty(config[serviceName].PORT)
-        ? `${this.services[serviceName]}:${config[serviceName].PORT}`
-        : `${this.services[serviceName]}:${window.location.port}`;
+      if (config[serviceName].PORT !== '80') {
+        this.services[serviceName] = !isEmpty(config[serviceName].PORT)
+          ? `${this.services[serviceName]}:${config[serviceName].PORT}`
+          : `${this.services[serviceName]}:${window.location.port}`;
+      }
       /** Путь */
       if (isEmpty(config[serviceName].PATH)) {
         throw new Error(
