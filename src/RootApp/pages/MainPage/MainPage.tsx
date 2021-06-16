@@ -15,13 +15,16 @@ import {StorageVariables} from '../../../common/constants/storageConst';
  * Главная страница
  */
 const MainPage = (): JSX.Element => {
-  const [storageExpert, setStorageExpert] = useLocalStorage<string>(StorageVariables.expert);
+  const [storageExpert, setStorageExpert, removeStorageExpert] = useLocalStorage<string>(StorageVariables.expert);
   const [storageLevel, setStorageLevel] = useLocalStorage<string>(StorageVariables.level);
   const [storagePosition, setStoragePosition] = useLocalStorage<string>(StorageVariables.position);
   const {fields, setField, errors, isSubmit, setIsSubmit, isValidForm} = useForm<IFormValues, IFormErrors>(
     testFormValidator,
     {
-      [EFormFields.expert]: !isEmpty(storageExpert) ? storageExpert : '',
+      [EFormFields.expert]:
+        !isEmpty(storageExpert) && !isEmpty(config.experts.find((expert) => expert.value === storageExpert))
+          ? storageExpert
+          : '',
       [EFormFields.level]: !isEmpty(storageLevel) ? storageLevel : '',
       [EFormFields.position]: !isEmpty(storagePosition) ? storagePosition : '',
     },
@@ -122,6 +125,14 @@ const MainPage = (): JSX.Element => {
     };
 
   /**
+   * Очистка эксперта
+   */
+  const handleClearExpert = () => {
+    removeStorageExpert();
+    setField(EFormFields.expert, undefined);
+  };
+
+  /**
    * Отправка формы
    */
   const handleSubmit = (): void => {
@@ -180,18 +191,25 @@ const MainPage = (): JSX.Element => {
                 <Radio value="#expert">Expert</Radio>
               </Radio.Group>
             </div>
-            <div className="main-page__form-field">
-              <div className="main-page__form-field-title">
-                <h5>Эксперт:</h5>
-                {!isEmpty(errors.expert) && <p>{errors.expert}</p>}
+            {!isEmpty(config.experts) && (
+              <div className="main-page__form-field">
+                <div className="main-page__form-field-title">
+                  <div className="main-page__form-field-title-box">
+                    <h5>Эксперт:</h5>
+                    <Button disabled={isSubmit} size="small" onClick={handleClearExpert}>
+                      Сбросить
+                    </Button>
+                  </div>
+                </div>
+                <Radio.Group disabled={isSubmit} onChange={handleChangeField(EFormFields.expert)} value={fields.expert}>
+                  {config.experts.map((expert) => (
+                    <Radio key={expert.value} value={expert.value}>
+                      {expert.title}
+                    </Radio>
+                  ))}
+                </Radio.Group>
               </div>
-              <Radio.Group disabled={isSubmit} onChange={handleChangeField(EFormFields.expert)} value={fields.expert}>
-                <Radio value="@asa">Анохин А.</Radio>
-                <Radio value="@ria">Руденко И.</Radio>
-                <Radio value="@bsv">Безверхов С.</Radio>
-                <Radio value="@lai">Лыхина А.</Radio>
-              </Radio.Group>
-            </div>
+            )}
           </div>
         </div>
         <div className="main-page__block main-page__block--bottom">

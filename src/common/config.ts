@@ -24,6 +24,8 @@ interface IServiceConfig {
  * Общий класс, содержащий и формирующий конфигурацию
  */
 class Config {
+  experts: IObj[] = [];
+
   formData: IObj = {};
 
   services: IObj = {};
@@ -45,6 +47,7 @@ class Config {
    * @param {Object} configuration - Результат запроса конфигурации
    */
   init(configuration: IObj) {
+    this.experts = configuration.data.EXPERTS;
     this.formData = configuration.data.FORM_DATA;
     const config: IConfig = configuration.data.HOSTS;
     /** Проверка на пустоту конфига */

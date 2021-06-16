@@ -9,5 +9,23 @@
   },
   "FORM_DATA": {
     "AUTHOR": "skryabinvi"
-  }
+  },
+  "EXPERTS": [
+    {
+      "value": "@asa",
+      "title": "Анохин А."
+    },
+    {
+      "value": "@ria",
+      "title": "Руденко И."
+    },
+    {
+      "value": "@bsv",
+      "title": "Безверхов С."
+    },
+    {
+      "value": "@lai",
+      "title": "Лыхина А."
+    }
+  ]
 }

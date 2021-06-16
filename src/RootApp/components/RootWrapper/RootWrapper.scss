@@ -7,7 +7,6 @@
   @include flex(1);
   position: relative;
   width: 675px;
-  height: 400px;
 
   &__content {
     @include flexbox();

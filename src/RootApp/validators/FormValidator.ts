@@ -14,9 +14,6 @@ const testFormValidator: (fields: IFormValues) => IFormErrors | IObj = (fields) 
   if (isEmpty(fields[EFormFields.level])) {
     errors.level = 'Укажите уровень';
   }
-  if (isEmpty(fields[EFormFields.expert])) {
-    errors.expert = 'Укажите эксперта';
-  }
   return errors;
 };
 

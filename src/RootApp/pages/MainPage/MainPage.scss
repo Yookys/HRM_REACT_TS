@@ -31,9 +31,16 @@
 
   &__form {
     &-field {
+      @include flex-wrap(wrap);
+
+      & .ant-radio-wrapper {
+        margin-top: 10px;
+      }
+
       &:not(:first-child) {
         margin-top: 20px;
       }
+
       &-title {
         @include flexbox();
         @include justify-content(space-between);
@@ -42,6 +49,20 @@
 
         & > p {
           color: $red-60;
+        }
+
+        &-box {
+          @include flexbox();
+          @include justify-content(flex-start);
+          @include align-items(center);
+
+          & > h5 {
+            margin-bottom: 0;
+          }
+
+          & > button  {
+            margin-left: 15px;
+          }
         }
       }
     }
