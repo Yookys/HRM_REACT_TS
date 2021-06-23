@@ -1,7 +1,7 @@
 /// <reference types="chrome"/>
 import './MainPage.scss';
 import React from 'react';
-import {Button, Radio, RadioChangeEvent, message} from 'antd';
+import {Button, Input, message, Radio, RadioChangeEvent} from 'antd';
 import useForm from '../../../common/hooks/useForm';
 import {EFormFields, IFormErrors, IFormValues} from '../../models/FormModel';
 import testFormValidator from '../../validators/FormValidator';
@@ -15,9 +15,11 @@ import {StorageVariables} from '../../../common/constants/storageConst';
  * Главная страница
  */
 const MainPage = (): JSX.Element => {
+  const {TextArea} = Input;
   const [storageExpert, setStorageExpert, removeStorageExpert] = useLocalStorage<string>(StorageVariables.expert);
   const [storageLevel, setStorageLevel] = useLocalStorage<string>(StorageVariables.level);
   const [storagePosition, setStoragePosition] = useLocalStorage<string>(StorageVariables.position);
+  const [storageRemark, setStorageRemark] = useLocalStorage<string>(StorageVariables.position);
   const {fields, setField, errors, isSubmit, setIsSubmit, isValidForm} = useForm<IFormValues, IFormErrors>(
     testFormValidator,
     {
@@ -27,6 +29,7 @@ const MainPage = (): JSX.Element => {
           : '',
       [EFormFields.level]: !isEmpty(storageLevel) ? storageLevel : '',
       [EFormFields.position]: !isEmpty(storagePosition) ? storagePosition : '',
+      [EFormFields.remark]: !isEmpty(storageRemark) ? storageRemark : '',
     },
     {}
   );
@@ -82,6 +85,12 @@ const MainPage = (): JSX.Element => {
       inputExpert.value = fields.expert;
       form.appendChild(inputExpert);
 
+      const inputRemark = document.createElement('input');
+      inputRemark.type = 'hidden';
+      inputRemark.name = 'remark';
+      inputRemark.value = fields.remark;
+      form.appendChild(inputRemark);
+
       const inputBody = document.createElement('input');
       inputBody.type = 'hidden';
       inputBody.name = 'body';
@@ -107,7 +116,7 @@ const MainPage = (): JSX.Element => {
    */
   const handleChangeField =
     (field: EFormFields) =>
-    (event: RadioChangeEvent): void => {
+    (event: RadioChangeEvent | React.ChangeEvent<HTMLTextAreaElement>): void => {
       switch (field) {
         case EFormFields.expert:
           setStorageExpert(event.target.value);
@@ -117,6 +126,9 @@ const MainPage = (): JSX.Element => {
           break;
         case EFormFields.position:
           setStoragePosition(event.target.value);
+          break;
+        case EFormFields.remark:
+          setStorageRemark(event.target.value);
           break;
         default:
           break;
@@ -210,6 +222,12 @@ const MainPage = (): JSX.Element => {
                 </Radio.Group>
               </div>
             )}
+            <div className="main-page__form-field">
+              <div className="main-page__form-field-title">
+                <h5>Примечание:</h5>
+              </div>
+              <TextArea rows={4} onChange={handleChangeField(EFormFields.remark)} />
+            </div>
           </div>
         </div>
         <div className="main-page__block main-page__block--bottom">
