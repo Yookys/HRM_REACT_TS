@@ -19,7 +19,7 @@ const MainPage = (): JSX.Element => {
   const [storageExpert, setStorageExpert, removeStorageExpert] = useLocalStorage<string>(StorageVariables.expert);
   const [storageLevel, setStorageLevel] = useLocalStorage<string>(StorageVariables.level);
   const [storagePosition, setStoragePosition] = useLocalStorage<string>(StorageVariables.position);
-  const [storageRemark, setStorageRemark] = useLocalStorage<string>(StorageVariables.position);
+  const [storageDescription, setStorageDescription] = useLocalStorage<string>(StorageVariables.description);
   const {fields, setField, errors, isSubmit, setIsSubmit, isValidForm} = useForm<IFormValues, IFormErrors>(
     testFormValidator,
     {
@@ -29,7 +29,7 @@ const MainPage = (): JSX.Element => {
           : '',
       [EFormFields.level]: !isEmpty(storageLevel) ? storageLevel : '',
       [EFormFields.position]: !isEmpty(storagePosition) ? storagePosition : '',
-      [EFormFields.remark]: !isEmpty(storageRemark) ? storageRemark : '',
+      [EFormFields.description]: !isEmpty(storageDescription) ? storageDescription : '',
     },
     {}
   );
@@ -85,11 +85,11 @@ const MainPage = (): JSX.Element => {
       inputExpert.value = fields.expert;
       form.appendChild(inputExpert);
 
-      const inputRemark = document.createElement('input');
-      inputRemark.type = 'hidden';
-      inputRemark.name = 'remark';
-      inputRemark.value = fields.remark;
-      form.appendChild(inputRemark);
+      const inputDescription = document.createElement('input');
+      inputDescription.type = 'hidden';
+      inputDescription.name = 'description';
+      inputDescription.value = fields.description;
+      form.appendChild(inputDescription);
 
       const inputBody = document.createElement('input');
       inputBody.type = 'hidden';
@@ -127,8 +127,8 @@ const MainPage = (): JSX.Element => {
         case EFormFields.position:
           setStoragePosition(event.target.value);
           break;
-        case EFormFields.remark:
-          setStorageRemark(event.target.value);
+        case EFormFields.description:
+          setStorageDescription(event.target.value);
           break;
         default:
           break;
@@ -226,7 +226,7 @@ const MainPage = (): JSX.Element => {
               <div className="main-page__form-field-title">
                 <h5>Примечание:</h5>
               </div>
-              <TextArea rows={4} onChange={handleChangeField(EFormFields.remark)} />
+              <TextArea rows={4} onChange={handleChangeField(EFormFields.description)} />
             </div>
           </div>
         </div>
