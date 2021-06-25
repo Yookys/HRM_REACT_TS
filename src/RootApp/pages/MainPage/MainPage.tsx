@@ -19,7 +19,6 @@ const MainPage = (): JSX.Element => {
   const [storageExpert, setStorageExpert, removeStorageExpert] = useLocalStorage<string>(StorageVariables.expert);
   const [storageLevel, setStorageLevel] = useLocalStorage<string>(StorageVariables.level);
   const [storagePosition, setStoragePosition] = useLocalStorage<string>(StorageVariables.position);
-  const [storageDescription, setStorageDescription] = useLocalStorage<string>(StorageVariables.description);
   const {fields, setField, errors, isSubmit, setIsSubmit, isValidForm} = useForm<IFormValues, IFormErrors>(
     testFormValidator,
     {
@@ -29,7 +28,7 @@ const MainPage = (): JSX.Element => {
           : '',
       [EFormFields.level]: !isEmpty(storageLevel) ? storageLevel : '',
       [EFormFields.position]: !isEmpty(storagePosition) ? storagePosition : '',
-      [EFormFields.description]: !isEmpty(storageDescription) ? storageDescription : '',
+      [EFormFields.description]: '',
     },
     {}
   );
@@ -126,9 +125,6 @@ const MainPage = (): JSX.Element => {
           break;
         case EFormFields.position:
           setStoragePosition(event.target.value);
-          break;
-        case EFormFields.description:
-          setStorageDescription(event.target.value);
           break;
         default:
           break;
