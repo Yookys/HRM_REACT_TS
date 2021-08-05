@@ -1,6 +1,6 @@
 /// <reference types="chrome"/>
 import './MainPage.scss';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Input, message, Radio, RadioChangeEvent} from 'antd';
 import useForm from '../../../common/hooks/useForm';
 import {EFormFields, IFormErrors, IFormValues} from '../../models/FormModel';
@@ -14,7 +14,7 @@ import {StorageVariables} from '../../../common/constants/storageConst';
 /**
  * Главная страница
  */
-const MainPage = (): JSX.Element => {
+function MainPage(): JSX.Element {
   const {TextArea} = Input;
   const [storageExpert, setStorageExpert, removeStorageExpert] = useLocalStorage<string>(StorageVariables.expert);
   const [storageLevel, setStorageLevel] = useLocalStorage<string>(StorageVariables.level);
@@ -69,25 +69,25 @@ const MainPage = (): JSX.Element => {
       const inputPosition = document.createElement('input');
       inputPosition.type = 'hidden';
       inputPosition.name = 'position';
-      inputPosition.value = fields.position;
+      inputPosition.value = response.position;
       form.appendChild(inputPosition);
 
       const inputLevel = document.createElement('input');
       inputLevel.type = 'hidden';
       inputLevel.name = 'level';
-      inputLevel.value = fields.level;
+      inputLevel.value = response.level;
       form.appendChild(inputLevel);
 
       const inputExpert = document.createElement('input');
       inputExpert.type = 'hidden';
       inputExpert.name = 'assignee';
-      inputExpert.value = fields.expert;
+      inputExpert.value = response.expert;
       form.appendChild(inputExpert);
 
       const inputDescription = document.createElement('input');
       inputDescription.type = 'hidden';
       inputDescription.name = 'description';
-      inputDescription.value = fields.description;
+      inputDescription.value = response.description;
       form.appendChild(inputDescription);
 
       const inputBody = document.createElement('input');
@@ -108,6 +108,13 @@ const MainPage = (): JSX.Element => {
       setIsSubmit(false);
     }
   };
+
+  /**
+   * Запускаем слушателей событий
+   */
+  useEffect(() => {
+    chrome.runtime.onMessage.addListener(onReserveChromeMessage);
+  }, []);
 
   /**
    * Смена значения
@@ -146,10 +153,23 @@ const MainPage = (): JSX.Element => {
   const handleSubmit = (): void => {
     if (isValidForm()) {
       setIsSubmit(true);
-      chrome.runtime.onMessage.addListener(onReserveChromeMessage);
       chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
         chrome.tabs.executeScript(tabs[0].id ? tabs[0].id : 0, {
-          code: `var html = document.body.innerHTML; var text = document.body.innerText; chrome.runtime.sendMessage({action: "sendForm", url: '${tabs[0].url}', title: '${tabs[0].title}', text: text, html: html});`,
+          code: `
+            var html = document.body.innerHTML;
+            var text = document.body.innerText;
+            chrome.runtime.sendMessage({
+              action: "sendForm",
+              url: '${tabs[0].url}',
+              title: '${tabs[0].title}',              
+              text: text,
+              html: html,
+              position: '${fields.position}',
+              level: '${fields.level}',
+              expert: '${fields.expert}',
+              description:'${fields.description}',
+            });
+          `,
         });
       });
     }
