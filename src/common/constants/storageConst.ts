@@ -6,4 +6,5 @@ export enum StorageVariables {
   level = 'level',
   expert = 'expert',
   description = 'description',
+  sendInvite = 'sendInvite'
 }

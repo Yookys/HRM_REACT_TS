@@ -4,6 +4,7 @@ export enum EFormFields {
   level = 'level',
   expert = 'expert',
   description = 'description',
+  sendInvite = 'sendInvite'
 }
 
 /** Интерфейс значений формы */
@@ -12,6 +13,7 @@ export interface IFormValues {
   [EFormFields.level]?: string;
   [EFormFields.expert]?: string;
   [EFormFields.description]?: string;
+  [EFormFields.sendInvite]?: boolean;
 }
 
 /** Интерфейс ошибок в форме */
@@ -20,4 +22,5 @@ export interface IFormErrors {
   [EFormFields.level]?: string;
   [EFormFields.expert]?: string;
   [EFormFields.description]?: string;
+  [EFormFields.sendInvite]?: string;
 }

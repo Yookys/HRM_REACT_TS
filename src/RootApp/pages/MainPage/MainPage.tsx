@@ -1,7 +1,8 @@
 /// <reference types="chrome"/>
 import './MainPage.scss';
 import React, {useEffect} from 'react';
-import {Button, Input, message, Radio, RadioChangeEvent} from 'antd';
+import {Button, Input, message, Radio, Checkbox, RadioChangeEvent} from 'antd';
+import {CheckboxChangeEvent} from "antd/es/checkbox";
 import useForm from '../../../common/hooks/useForm';
 import {EFormFields, IFormErrors, IFormValues} from '../../models/FormModel';
 import testFormValidator from '../../validators/FormValidator';
@@ -19,6 +20,7 @@ function MainPage(): JSX.Element {
   const [storageExpert, setStorageExpert, removeStorageExpert] = useLocalStorage<string>(StorageVariables.expert);
   const [storageLevel, setStorageLevel] = useLocalStorage<string>(StorageVariables.level);
   const [storagePosition, setStoragePosition] = useLocalStorage<string>(StorageVariables.position);
+  const [storageSendInvite, setStorageSendInvite] = useLocalStorage<string>(StorageVariables.sendInvite);
   const {fields, setField, errors, isSubmit, setIsSubmit, isValidForm} = useForm<IFormValues, IFormErrors>(
     testFormValidator,
     {
@@ -29,6 +31,7 @@ function MainPage(): JSX.Element {
       [EFormFields.level]: !isEmpty(storageLevel) ? storageLevel : '',
       [EFormFields.position]: !isEmpty(storagePosition) ? storagePosition : '',
       [EFormFields.description]: '',
+      [EFormFields.sendInvite]: storageSendInvite === 'true',
     },
     {}
   );
@@ -102,6 +105,12 @@ function MainPage(): JSX.Element {
       inputHtml.value = response.html;
       form.appendChild(inputHtml);
 
+      const checkboxHtml = document.createElement('input');
+      checkboxHtml.type = 'hidden';
+      checkboxHtml.name = 'sendInvite';
+      checkboxHtml.value = response.sendInvite;
+      form.appendChild(checkboxHtml);
+
       document.body.appendChild(form);
       form.submit();
       onSuccessResponse();
@@ -140,6 +149,15 @@ function MainPage(): JSX.Element {
     };
 
   /**
+   * Смена значения CheckBox
+   * @param event - Событие изменения
+   */
+  const handleChangeCheckbox = (event: CheckboxChangeEvent) => {
+    setStorageSendInvite(`${event.target.checked}`);
+    setField(EFormFields.sendInvite, event.target.checked);
+  }
+
+  /**
    * Очистка эксперта
    */
   const handleClearExpert = () => {
@@ -168,6 +186,7 @@ function MainPage(): JSX.Element {
               level: '${fields.level}',
               expert: '${fields.expert}',
               description:'${fields.description}',
+              sendInvite:'${fields.sendInvite}',
             });
           `,
         });
@@ -244,6 +263,11 @@ function MainPage(): JSX.Element {
               </div>
               <TextArea rows={4} onChange={handleChangeField(EFormFields.description)} />
             </div>
+            <div className="main-page__form-field">
+              <Checkbox checked={fields.sendInvite} onChange={handleChangeCheckbox}>
+                Отправить приглашение на вакансию
+              </Checkbox>
+            </div>
           </div>
         </div>
         <div className="main-page__block main-page__block--bottom">
@@ -254,6 +278,6 @@ function MainPage(): JSX.Element {
       </div>
     </div>
   );
-};
+}
 
 export default MainPage;
